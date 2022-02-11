@@ -25,7 +25,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       throw new UnauthorizedException();
     }
 
-    const { username, firstName, lastName, email, gender, role } = user;
+    const { username, firstName, lastName, email, gender, role, birthDate, aboutMe } = user;
     const userInfo = {
       id: id,
       username: username,
@@ -34,6 +34,8 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       email: email,
       gender: gender,
       role: role,
+      birthDate: birthDate,
+      aboutMe: aboutMe,
     };
     return userInfo;
   }

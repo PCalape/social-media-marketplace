@@ -8,8 +8,10 @@ import {
   Length,
   MaxLength,
   Matches,
+  IsDate,
 } from 'class-validator';
 import { RoleEnum } from 'src/common/roles.enum';
+import { Type } from 'class-transformer';
 
 @InputType()
 export class RegisterUserInput {
@@ -47,4 +49,13 @@ export class RegisterUserInput {
   @Field(() => RoleEnum)
   @IsEnum(RoleEnum)
   role: RoleEnum;
+
+  @Field()
+  @Type(() => Date)
+  @IsDate()
+  birthDate: Date;
+
+  @Field()
+  @IsAlpha()
+  aboutMe: string;
 }

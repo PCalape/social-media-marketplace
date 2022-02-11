@@ -25,4 +25,10 @@ export class UserEntity extends BaseEntity {
 
   @Column()
   role: RoleEnum;
+
+  @Column()
+  birthDate: Date;
+
+  @Column()
+  aboutMe: string;
 }

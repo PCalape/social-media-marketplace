@@ -23,4 +23,10 @@ export class UserOutput {
 
   @Field()
   role: RoleEnum;
+
+  @Field()
+  birthDate: Date;
+
+  @Field()
+  aboutMe: string;
 }

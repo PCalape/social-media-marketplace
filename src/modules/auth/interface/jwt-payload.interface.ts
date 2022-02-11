@@ -9,4 +9,6 @@ export interface JwtPayload {
   email: string;
   gender: GenderEnum;
   role: RoleEnum;
+  birthDate: Date;
+  aboutMe: string;
 }
