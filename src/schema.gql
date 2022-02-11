@@ -1,0 +1,54 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type UserOutput {
+  id: String!
+  username: String!
+  firstName: String!
+  lastName: String!
+  email: String!
+  gender: String!
+  role: String!
+}
+
+type AuthCredentialsOutput {
+  accessToken: String!
+}
+
+type Query {
+  getUsers: [UserOutput!]!
+  viewProfile: [UserOutput!]!
+  login(input: AuthCredentialsInput!): AuthCredentialsOutput!
+}
+
+input AuthCredentialsInput {
+  username: String!
+  password: String!
+}
+
+type Mutation {
+  register(input: RegisterUserInput!): UserOutput!
+}
+
+input RegisterUserInput {
+  username: String!
+  firstName: String!
+  lastName: String!
+  email: String!
+  gender: GenderEnum!
+  password: String!
+  role: RoleEnum!
+}
+
+"""Gender"""
+enum GenderEnum {
+  MALE
+  FEMALE
+}
+
+"""Role"""
+enum RoleEnum {
+  USER
+  ADMIN
+}
