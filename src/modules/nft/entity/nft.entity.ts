@@ -17,7 +17,7 @@ export class NftEntity extends BaseEntity {
   @Column()
   category: string;
 
-  @Column()
+  @Column({ type: 'numeric', precision: 18, scale: 8, default: 1 })
   price: number;
   
   //soft delete

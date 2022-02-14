@@ -36,7 +36,7 @@ export class UserEntity extends BaseEntity {
   @Column()
   aboutMe: string;
 
-  @Column({default: 888})
+  @Column({ type: 'numeric', precision: 18, scale: 8, default: 888 })
   balance: number = 888;
 
   //soft delete

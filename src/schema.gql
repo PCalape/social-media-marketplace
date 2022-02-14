@@ -51,7 +51,6 @@ type Query {
   getUserById(userId: String!): [UserOutput!]!
   viewBalance: [UserWalletBalance!]!
   login(input: AuthCredentialsInput!): AuthCredentialsOutput!
-  getNfts: [NftOutput!]!
   getComments: [CommentOutput!]!
   getTransactions: [TransactionOutput!]!
 }
@@ -66,6 +65,7 @@ type Mutation {
   deleteUser(userId: String!): String!
   restoreUser(userId: String!): String!
   register(input: RegisterUserInput!): UserOutput!
+  createNft(input: NftInput!): NftOutput!
 }
 
 input UserInput {
@@ -101,4 +101,12 @@ enum GenderEnum {
 enum RoleEnum {
   USER
   ADMIN
+}
+
+input NftInput {
+  image: String!
+  title: String!
+  description: String!
+  category: String!
+  price: Float!
 }
