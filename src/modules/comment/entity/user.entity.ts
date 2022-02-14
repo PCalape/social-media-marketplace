@@ -1,7 +1,7 @@
 import { BaseEntity } from 'src/common/base.entity';
 import { GenderEnum } from 'src/common/gender.enum';
 import { RoleEnum } from 'src/common/roles.enum';
-import { Column, DeleteDateColumn, Entity } from 'typeorm';
+import { Column, Entity } from 'typeorm';
 
 @Entity('users')
 export class UserEntity extends BaseEntity {
@@ -31,8 +31,4 @@ export class UserEntity extends BaseEntity {
 
   @Column()
   aboutMe: string;
-
-  //soft delete
-  @DeleteDateColumn()
-  deletedAt?: Date;
 }

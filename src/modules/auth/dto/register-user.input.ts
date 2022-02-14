@@ -56,6 +56,5 @@ export class RegisterUserInput {
   birthDate: Date;
 
   @Field()
-  @IsAlpha()
   aboutMe: string;
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { UserRepository } from './user.repository';
+import { UserRepository } from './transaction.repository';
 
 @Injectable()
 export class UserService {
@@ -15,9 +15,5 @@ export class UserService {
 
   async findUserById(userId: string) {
     return await this.userRepository.findOne(userId);
-  }
-
-  async deleteUserById(userId: string) {
-    await this.userRepository.softDelete(userId);
   }
 }
