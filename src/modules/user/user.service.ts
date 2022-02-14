@@ -1,4 +1,6 @@
 import { Injectable } from '@nestjs/common';
+import { UserInput } from './dto/user.input';
+import { UserOutput } from './dto/user.output';
 import { UserRepository } from './user.repository';
 
 @Injectable()
@@ -13,8 +15,12 @@ export class UserService {
     return await this.userRepository.viewProfile(userId);
   }
 
-  async findUserById(userId: string) {
-    return await this.userRepository.findOne(userId);
+  async updateProfile(userId: string, input: UserInput) {
+    const user = await this.userRepository.preload({
+    id: userId,
+    ...input,
+  });
+    return this.userRepository.save(user);
   }
 
   async deleteUserById(userId: string) {

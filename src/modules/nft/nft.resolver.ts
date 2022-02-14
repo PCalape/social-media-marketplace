@@ -7,7 +7,6 @@ import { NftService } from './nft.service';
 import { RoleEnum } from 'src/common/roles.enum';
 import { Roles } from 'src/common/role.decorator';
 import { AuthorizationGuard } from '../auth/guards/authorization-guard';
-import { NftInput } from './dto/nft.input';
 import { UserOutput } from '../user/dto/user.output';
 import { UserService } from '../user/user.service';
 
@@ -21,13 +20,7 @@ export class NftResolver {
   @UseGuards(GqlAuth, AuthorizationGuard)
   @Roles(RoleEnum.ADMIN)
   @Query(() => [NftOutput])
-  getUsers(@GetUser() user: UserOutput) {
+  getNfts(@GetUser() user: UserOutput) {
     return this.userService.findUsers(user.id);
-  }
-
-  @UseGuards(GqlAuth)
-  @Query(() => [NftInput])
-  viewProfile(@GetUser() user: UserOutput) {
-    return this.userService.viewProfile(user.id);
   }
 }

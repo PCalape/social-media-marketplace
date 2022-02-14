@@ -1,5 +1,4 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
-import { type } from 'os';
 import { BaseEntity } from 'src/common/base.entity';
 import { GenderEnum } from 'src/common/gender.enum';
 import { RoleEnum } from 'src/common/roles.enum';
@@ -37,7 +36,7 @@ export class UserEntity extends BaseEntity {
   @Column()
   aboutMe: string;
 
-  @Column()
+  @Column({default: 888})
   balance: number = 888;
 
   //soft delete
@@ -64,10 +63,10 @@ export class UserEntity extends BaseEntity {
 
   addBalance(amount: number) {
     this.balance = this.balance + amount;
-}
+  }
 
   decreaseBalance(amount: number) {
     if (amount > this.balance) throw new HttpException('Not enough balance', HttpStatus.BAD_REQUEST);
     this.balance = this.balance - amount;
-}
+  }
 }
