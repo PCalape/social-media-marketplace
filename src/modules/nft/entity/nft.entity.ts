@@ -1,6 +1,6 @@
 import { BaseEntity } from 'src/common/base.entity';
 import { UserEntity } from 'src/modules/user/entity/user.entity';
-import { Column, Entity, ManyToOne } from 'typeorm';
+import { Column, DeleteDateColumn, Entity, ManyToOne } from 'typeorm';
 
 @Entity('nft')
 export class NftEntity extends BaseEntity {
@@ -18,7 +18,12 @@ export class NftEntity extends BaseEntity {
 
   @Column()
   price: number;
+  
+  //soft delete
+  @DeleteDateColumn()
+  deletedAt?: Date;
 
+  //connection to user
   @ManyToOne(type => UserEntity, user => user.id)
   user: UserEntity;
 }

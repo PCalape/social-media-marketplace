@@ -1,19 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { UserRepository } from './comment.repository';
+import { CommentRepository } from './comment.repository';
 
 @Injectable()
-export class UserService {
-  constructor(private readonly userRepository: UserRepository) {}
+export class CommentService {
+  constructor(private readonly commentRepository: CommentRepository) {}
 
-  async findUsers(userId: string) {
-    return await this.userRepository.findUsers(userId);
-  }
-
-  async viewProfile(userId: string) {
-    return await this.userRepository.viewProfile(userId);
-  }
-
-  async findUserById(userId: string) {
-    return await this.userRepository.findOne(userId);
+  async findComments() {
+    return await this.commentRepository.find();
   }
 }

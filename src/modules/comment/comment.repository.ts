@@ -1,13 +1,9 @@
-import { UserEntity } from './entity/user.entity';
+import { CommentEntity } from './entity/comment.entity';
 import { EntityRepository, Repository, Not, Equal } from 'typeorm';
 
-@EntityRepository(UserEntity)
-export class UserRepository extends Repository<UserEntity> {
-  async findUsers(userId: string) {
+@EntityRepository(CommentEntity)
+export class CommentRepository extends Repository<CommentEntity> {
+  async findComments(userId: string) {
     return await super.find({ id: Not(userId) });
-  }
-
-  async viewProfile(userId: string) {
-    return await super.find({ id: Equal(userId) });
   }
 }

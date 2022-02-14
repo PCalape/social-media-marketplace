@@ -1,29 +1,22 @@
 import { UseGuards } from '@nestjs/common';
 import { Resolver, Query } from '@nestjs/graphql';
 import { GqlAuth } from '../auth/guards/auth-gql.guard';
-import { UserOutput } from './dto/comment.output';
-import { GetUser } from '../../common/get-user.decorator';
-import { UserService } from './comment.service';
+import { CommentOutput } from './dto/comment.output';
 import { RoleEnum } from 'src/common/roles.enum';
 import { Roles } from 'src/common/role.decorator';
 import { AuthorizationGuard } from '../auth/guards/authorization-guard';
+import { CommentService } from './comment.service';
 
-@Resolver(() => UserOutput)
-export class UserResolver {
+@Resolver(() => CommentOutput)
+export class CommentResolver {
   constructor(
-    private readonly userService: UserService,
+    private readonly commentService: CommentService,
   ) {}
 
   @UseGuards(GqlAuth, AuthorizationGuard)
   @Roles(RoleEnum.ADMIN)
-  @Query(() => [UserOutput])
-  getUsers(@GetUser() user: UserOutput) {
-    return this.userService.findUsers(user.id);
-  }
-
-  @UseGuards(GqlAuth)
-  @Query(() => [UserOutput])
-  viewProfile(@GetUser() user: UserOutput) {
-    return this.userService.viewProfile(user.id);
+  @Query(() => [CommentOutput])
+  getComments() {
+    return this.commentService.findComments();
   }
 }

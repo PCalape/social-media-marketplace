@@ -1,14 +1,14 @@
 import { Module } from '@nestjs/common';
-import { UserService } from './comment.service';
-import { UserResolver } from './comment.resolver';
-import { UserRepository } from './comment.repository';
+import { CommentService } from './comment.service';
+import { CommentResolver } from './comment.resolver';
+import { CommentRepository } from './comment.repository';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([UserRepository]),
+    TypeOrmModule.forFeature([CommentRepository]),
   ],
-  providers: [UserService, UserResolver],
-  exports: [UserService, TypeOrmModule.forFeature([UserRepository])],
+  providers: [CommentService, CommentResolver],
+  exports: [CommentService, TypeOrmModule.forFeature([CommentRepository])],
 })
-export class UserModule {}
+export class CommentModule {}
