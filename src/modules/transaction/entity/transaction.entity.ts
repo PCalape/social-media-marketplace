@@ -1,34 +1,22 @@
+import { from } from 'rxjs';
 import { BaseEntity } from 'src/common/base.entity';
 import { GenderEnum } from 'src/common/gender.enum';
 import { RoleEnum } from 'src/common/roles.enum';
-import { Column, Entity } from 'typeorm';
+import { NftEntity } from 'src/modules/nft/entity/nft.entity';
+import { UserEntity } from 'src/modules/user/entity/user.entity';
+import { Column, Entity, ManyToOne } from 'typeorm';
 
-@Entity('users')
-export class UserEntity extends BaseEntity {
-  @Column({ unique: true })
-  username: string;
+@Entity('transactions')
+export class TransactionEntity extends BaseEntity {
+  
+  //connection to user
+  @ManyToOne(type => UserEntity, user => user.id)
+  from: UserEntity;
 
-  @Column()
-  firstName: string;
-
-  @Column()
-  lastName: string;
-
-  @Column({ unique: true })
-  email: string;
-
-  @Column()
-  gender: GenderEnum;
+  //connection to nft
+  @ManyToOne(type => NftEntity, nft => nft.id)
+  nft: NftEntity;
 
   @Column()
-  password: string;
-
-  @Column()
-  role: RoleEnum;
-
-  @Column()
-  birthDate: Date;
-
-  @Column()
-  aboutMe: string;
+  amount: string;
 }

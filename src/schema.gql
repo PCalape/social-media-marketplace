@@ -23,6 +23,10 @@ type AuthCredentialsOutput {
   accessToken: String!
 }
 
+type CommentOutput {
+  comment: String!
+}
+
 type NftOutput {
   image: String!
   title: String!
@@ -39,10 +43,18 @@ type NftInput {
   price: Float!
 }
 
+type TransactionOutput {
+  from: String!
+  toNft: String!
+  amount: String!
+}
+
 type Query {
   getUsers: [NftOutput!]!
   viewProfile: [NftInput!]!
   login(input: AuthCredentialsInput!): AuthCredentialsOutput!
+  getComments: [CommentOutput!]!
+  getTransactions: [TransactionOutput!]!
 }
 
 input AuthCredentialsInput {

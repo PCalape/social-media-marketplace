@@ -30,5 +30,9 @@ export class NftEntity extends BaseEntity {
 
   //connection to comment
   @OneToMany(type => CommentEntity, comment => comment.id)
-  comment: CommentEntity
+  comment: CommentEntity[]
+
+  //connection to soldToUser
+  @ManyToOne(type => UserEntity, soldTo => soldTo.id)
+  soldTo: UserEntity;
 }

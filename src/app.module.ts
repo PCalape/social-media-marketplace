@@ -7,6 +7,7 @@ import { join } from 'path';
 import { AuthModule } from './modules/auth/auth.module';
 import { CommentModule } from './modules/comment/comment.module';
 import { NftModule } from './modules/nft/nft.module';
+import { TransactionModule } from './modules/transaction/transaction.module';
 import { UserModule } from './modules/user/user.module';
 
 @Module({
@@ -38,6 +39,7 @@ import { UserModule } from './modules/user/user.module';
     AuthModule,
     NftModule,
     CommentModule,
+    TransactionModule,
   ],
   controllers: [],
   providers: [],

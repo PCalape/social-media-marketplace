@@ -1,19 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { UserRepository } from './transaction.repository';
+import { TransactionRepository } from './transaction.repository';
 
 @Injectable()
-export class UserService {
-  constructor(private readonly userRepository: UserRepository) {}
+export class TransactionService {
+  constructor(private readonly transactionRepository: TransactionRepository) {}
 
-  async findUsers(userId: string) {
-    return await this.userRepository.findUsers(userId);
-  }
-
-  async viewProfile(userId: string) {
-    return await this.userRepository.viewProfile(userId);
-  }
-
-  async findUserById(userId: string) {
-    return await this.userRepository.findOne(userId);
+  async findTransactions() {
+    return await this.transactionRepository.find();
   }
 }

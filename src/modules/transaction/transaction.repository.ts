@@ -1,9 +1,9 @@
-import { UserEntity } from './entity/transaction.entity';
+import { TransactionEntity } from './entity/transaction.entity';
 import { EntityRepository, Repository, Not, Equal } from 'typeorm';
 
-@EntityRepository(UserEntity)
-export class UserRepository extends Repository<UserEntity> {
-  async findUsers(userId: string) {
+@EntityRepository(TransactionEntity)
+export class TransactionRepository extends Repository<TransactionEntity> {
+  async findTransactions(userId: string) {
     return await super.find({ id: Not(userId) });
   }
 

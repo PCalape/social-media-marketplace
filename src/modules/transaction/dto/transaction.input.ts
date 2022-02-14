@@ -1,32 +1,13 @@
 import { ObjectType, Field } from '@nestjs/graphql';
-import { GenderEnum } from 'src/common/gender.enum';
-import { RoleEnum } from 'src/common/roles.enum';
+
 @ObjectType()
-export class UserOutput {
+export class TransactionInput {
   @Field()
-  id: string;
+  from: string;
 
   @Field()
-  username: string;
+  toNft: string;
 
   @Field()
-  firstName: string;
-
-  @Field()
-  lastName: string;
-
-  @Field()
-  email: string;
-
-  @Field()
-  gender: GenderEnum;
-
-  @Field()
-  role: RoleEnum;
-
-  @Field()
-  birthDate: Date;
-
-  @Field()
-  aboutMe: string;
+  amount: string;
 }
