@@ -48,11 +48,6 @@ export class UserEntity extends BaseEntity {
   @JoinColumn({name: "userId"})   
   nfts: NftEntity[]
 
-  //connection to nft as soldTo
-  @OneToMany(type => NftEntity, nft => nft.id)
-  @JoinColumn({name: "soldToId"})   
-  nftsSoldTo: NftEntity[]
-
   //connection to comment
   @OneToMany(type => CommentEntity, comment => comment.id)
   comments: CommentEntity[]
