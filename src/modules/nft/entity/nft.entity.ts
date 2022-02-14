@@ -1,5 +1,6 @@
 import { BaseEntity } from 'src/common/base.entity';
-import { Column, Entity } from 'typeorm';
+import { UserEntity } from 'src/modules/user/entity/user.entity';
+import { Column, Entity, ManyToOne } from 'typeorm';
 
 @Entity('nft')
 export class NftEntity extends BaseEntity {
@@ -17,4 +18,7 @@ export class NftEntity extends BaseEntity {
 
   @Column()
   price: number;
+
+  @ManyToOne(type => UserEntity, user => user.id)
+  user: UserEntity;
 }

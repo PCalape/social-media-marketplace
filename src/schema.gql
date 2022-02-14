@@ -23,9 +23,25 @@ type AuthCredentialsOutput {
   accessToken: String!
 }
 
+type NftOutput {
+  image: String!
+  title: String!
+  description: String!
+  category: String!
+  price: Float!
+}
+
+type NftInput {
+  image: String!
+  title: String!
+  description: String!
+  category: String!
+  price: Float!
+}
+
 type Query {
-  getUsers: [UserOutput!]!
-  viewProfile: [UserOutput!]!
+  getUsers: [NftOutput!]!
+  viewProfile: [NftInput!]!
   login(input: AuthCredentialsInput!): AuthCredentialsOutput!
 }
 
