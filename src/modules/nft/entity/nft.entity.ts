@@ -1,6 +1,7 @@
 import { BaseEntity } from 'src/common/base.entity';
+import { CommentEntity } from 'src/modules/comment/entity/comment.entity';
 import { UserEntity } from 'src/modules/user/entity/user.entity';
-import { Column, DeleteDateColumn, Entity, ManyToOne } from 'typeorm';
+import { Column, DeleteDateColumn, Entity, ManyToOne, OneToMany } from 'typeorm';
 
 @Entity('nft')
 export class NftEntity extends BaseEntity {
@@ -26,4 +27,8 @@ export class NftEntity extends BaseEntity {
   //connection to user
   @ManyToOne(type => UserEntity, user => user.id)
   user: UserEntity;
+
+  //connection to comment
+  @OneToMany(type => CommentEntity, comment => comment.id)
+  comment: CommentEntity
 }
