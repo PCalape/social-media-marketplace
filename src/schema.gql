@@ -63,6 +63,8 @@ input AuthCredentialsInput {
 
 type Mutation {
   updateProfile(input: UserInput!): UserOutput!
+  deleteUser(userId: String!): String!
+  restoreUser(userId: String!): String!
   register(input: RegisterUserInput!): UserOutput!
 }
 

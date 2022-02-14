@@ -17,13 +17,17 @@ export class UserService {
 
   async updateProfile(userId: string, input: UserInput) {
     const user = await this.userRepository.preload({
-    id: userId,
-    ...input,
-  });
+      id: userId,
+      ...input,
+    });
     return this.userRepository.save(user);
   }
 
   async deleteUserById(userId: string) {
     await this.userRepository.softDelete(userId);
+  }
+
+  async restoreUserById(userId: string) {
+    await this.userRepository.restore(userId);
   }
 }

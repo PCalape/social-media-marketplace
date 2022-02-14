@@ -46,4 +46,20 @@ export class UserResolver {
   updateProfile(@GetUser() user: UserOutput, @Args('input') input: UserInput) {
     return this.userService.updateProfile(user.id, input);
   }
+
+  @UseGuards(GqlAuth, AuthorizationGuard)
+  @Roles(RoleEnum.ADMIN)
+  @Mutation(() => String)
+  deleteUser(@Args('userId') userId: string) {
+    this.userService.deleteUserById(userId);
+    return "Successfully deleted user " + userId;
+  }
+
+  @UseGuards(GqlAuth, AuthorizationGuard)
+  @Roles(RoleEnum.ADMIN)
+  @Mutation(() => String)
+  restoreUser(@Args('userId') userId: string) {
+    this.userService.restoreUserById(userId);
+    return "Successfully restored user " + userId;
+  }
 }
