@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, ForbiddenException, Injectable } from '@nestjs/common';
 import { UserOutput } from '../user/dto/user.output';
 import { NftInput } from './dto/nft.input';
 import { NftRepository } from './nft.repository';
@@ -17,5 +17,12 @@ export class NftService {
 
   async findNftById(nftId: string) {
     return await this.nftRepository.findOne(nftId);
+  }
+
+  async deleteNftById(user: UserOutput, nftId: string) {
+    const nft = await this.nftRepository.findOne(nftId);
+    if (!nft) throw new BadRequestException('Nft not found');
+    if (nft.user.id !== user.id) throw new ForbiddenException('Method not allowed');
+    await this.nftRepository.softDelete(nftId);
   }
 }

@@ -63,6 +63,7 @@ type Mutation {
   restoreUser(input: UUIDInput!): String!
   register(input: RegisterUserInput!): UserOutput!
   createNft(input: NftInput!): NftOutput!
+  deleteNft(input: UUIDInput!): String!
   buyNft(input: UUIDInput!): String!
 }
 
