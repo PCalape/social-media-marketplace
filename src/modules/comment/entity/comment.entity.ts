@@ -13,6 +13,6 @@ export class CommentEntity extends BaseEntity {
   nft: NftEntity;
 
   //connection to user
-  @ManyToOne(type => UserEntity, user => user.comments)
+  @ManyToOne(type => UserEntity, user => user.comments, {eager: true})
   user: UserEntity;
 }

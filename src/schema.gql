@@ -32,6 +32,7 @@ type AuthCredentialsOutput {
 }
 
 type CommentOutput {
+  id: String!
   comment: String!
 }
 
@@ -49,7 +50,6 @@ type Query {
   getUserById(input: UUIDInput!): [UserOutput!]!
   viewBalance: [UserWalletBalance!]!
   login(input: AuthCredentialsInput!): AuthCredentialsOutput!
-  getComments: [CommentOutput!]!
 }
 
 input UUIDInput {
@@ -68,6 +68,9 @@ type Mutation {
   register(input: RegisterUserInput!): UserOutput!
   createNft(input: NftInput!): NftOutput!
   deleteNft(input: UUIDInput!): StringOutput!
+  createComment(input: CommentInput!): CommentOutput!
+  updateComment(input: CommentUpdate!): CommentOutput!
+  deleteComment(input: UUIDInput!): StringOutput!
   buyNft(input: UUIDInput!): StringOutput!
 }
 
@@ -112,4 +115,14 @@ input NftInput {
   description: String!
   category: String!
   price: Float!
+}
+
+input CommentInput {
+  comment: String!
+  nftId: String!
+}
+
+input CommentUpdate {
+  id: String!
+  comment: String!
 }
