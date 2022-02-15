@@ -9,10 +9,10 @@ export class CommentEntity extends BaseEntity {
   comment: string;
 
   //connection to nft
-  @ManyToOne(type => NftEntity, nft => nft.id)
+  @ManyToOne(type => NftEntity, nft => nft.comments)
   nft: NftEntity;
 
   //connection to user
-  @ManyToOne(type => UserEntity, user => user.id)
+  @ManyToOne(type => UserEntity, user => user.comments)
   user: UserEntity;
 }

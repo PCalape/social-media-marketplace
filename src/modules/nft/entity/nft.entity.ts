@@ -1,5 +1,6 @@
 import { BaseEntity } from 'src/common/base.entity';
 import { CommentEntity } from 'src/modules/comment/entity/comment.entity';
+import { TransactionEntity } from 'src/modules/transaction/entity/transaction.entity';
 import { UserEntity } from 'src/modules/user/entity/user.entity';
 import { Column, DeleteDateColumn, Entity, ManyToOne, OneToMany } from 'typeorm';
 
@@ -25,10 +26,13 @@ export class NftEntity extends BaseEntity {
   deletedAt?: Date;
 
   //connection to user
-  @ManyToOne(type => UserEntity, user => user.id)
+  @ManyToOne(type => UserEntity, user => user.nfts, { eager: true })
   user: UserEntity;
 
   //connection to comment
-  @OneToMany(type => CommentEntity, comment => comment.id)
-  comment: CommentEntity[]
+  @OneToMany(type => CommentEntity, comment => comment.nft)
+  comments: CommentEntity[]
+
+  @OneToMany(type => TransactionEntity, transaction => transaction.nft)
+  transactions: TransactionEntity[]
 }

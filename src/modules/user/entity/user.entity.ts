@@ -44,24 +44,23 @@ export class UserEntity extends BaseEntity {
   deletedAt?: Date;
 
   //connection to nft as owner
-  @OneToMany(type => NftEntity, nft => nft.id)
-  @JoinColumn({name: "userId"})   
+  @OneToMany(type => NftEntity, nft => nft.user)
   nfts: NftEntity[]
 
   //connection to comment
-  @OneToMany(type => CommentEntity, comment => comment.id)
+  @OneToMany(type => CommentEntity, comment => comment.user)
   comments: CommentEntity[]
 
   //connection to transaction
-  @OneToMany(type => TransactionEntity, transaction => transaction.id)
+  @OneToMany(type => TransactionEntity, transaction => transaction.from)
   transactions: TransactionEntity[]
 
   addBalance(amount: number) {
-    this.balance = this.balance + amount;
+    this.balance = +this.balance + +amount;
   }
 
   decreaseBalance(amount: number) {
     if (amount > this.balance) throw new HttpException('Not enough balance', HttpStatus.BAD_REQUEST);
-    this.balance = this.balance - amount;
+    this.balance = +this.balance - +amount;
   }
 }

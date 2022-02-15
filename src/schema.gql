@@ -39,20 +39,17 @@ type NftOutput {
   price: Float!
 }
 
-type TransactionOutput {
-  from: String!
-  toNft: String!
-  amount: String!
-}
-
 type Query {
   getUsers: [UserOutput!]!
   viewProfile: [UserOutput!]!
-  getUserById(userId: String!): [UserOutput!]!
+  getUserById(input: UUIDInput!): [UserOutput!]!
   viewBalance: [UserWalletBalance!]!
   login(input: AuthCredentialsInput!): AuthCredentialsOutput!
   getComments: [CommentOutput!]!
-  getTransactions: [TransactionOutput!]!
+}
+
+input UUIDInput {
+  uuid: String!
 }
 
 input AuthCredentialsInput {
@@ -62,10 +59,11 @@ input AuthCredentialsInput {
 
 type Mutation {
   updateProfile(input: UserInput!): UserOutput!
-  deleteUser(userId: String!): String!
-  restoreUser(userId: String!): String!
+  deleteUser(input: UUIDInput!): String!
+  restoreUser(input: UUIDInput!): String!
   register(input: RegisterUserInput!): UserOutput!
   createNft(input: NftInput!): NftOutput!
+  buyNft(input: UUIDInput!): String!
 }
 
 input UserInput {

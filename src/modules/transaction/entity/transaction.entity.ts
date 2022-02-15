@@ -10,11 +10,11 @@ import { Column, Entity, ManyToOne } from 'typeorm';
 export class TransactionEntity extends BaseEntity {
   
   //connection to user
-  @ManyToOne(type => UserEntity, user => user.id)
+  @ManyToOne(type => UserEntity, user => user.transactions)
   from: UserEntity;
 
   //connection to nft
-  @ManyToOne(type => NftEntity, nft => nft.id)
+  @ManyToOne(type => NftEntity, nft => nft.transactions)
   nft: NftEntity;
 
   @Column()

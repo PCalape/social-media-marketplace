@@ -9,6 +9,7 @@ import { Roles } from 'src/common/role.decorator';
 import { AuthorizationGuard } from '../auth/guards/authorization-guard';
 import { UserWalletBalance } from './dto/user.wallet.balance';
 import { UserInput } from './dto/user.input';
+import { UUIDInput } from 'src/common/uuid.input';
 
 @Resolver(() => UserOutput)
 export class UserResolver {
@@ -31,8 +32,8 @@ export class UserResolver {
 
   @UseGuards(GqlAuth)
   @Query(() => [UserOutput])
-  getUserById(@Args('userId') userId: string) {
-    return this.userService.viewProfile(userId);
+  getUserById(@Args('input') userId: UUIDInput) {
+    return this.userService.viewProfile(userId.uuid);
   }
 
   @UseGuards(GqlAuth)
@@ -50,16 +51,16 @@ export class UserResolver {
   @UseGuards(GqlAuth, AuthorizationGuard)
   @Roles(RoleEnum.ADMIN)
   @Mutation(() => String)
-  deleteUser(@Args('userId') userId: string) {
-    this.userService.deleteUserById(userId);
-    return "Successfully deleted user " + userId;
+  deleteUser(@Args('input') userId: UUIDInput) {
+    this.userService.deleteUserById(userId.uuid);
+    return "Successfully deleted user " + userId.uuid;
   }
 
   @UseGuards(GqlAuth, AuthorizationGuard)
   @Roles(RoleEnum.ADMIN)
   @Mutation(() => String)
-  restoreUser(@Args('userId') userId: string) {
-    this.userService.restoreUserById(userId);
-    return "Successfully restored user " + userId;
+  restoreUser(@Args('input') userId: UUIDInput) {
+    this.userService.restoreUserById(userId.uuid);
+    return "Successfully restored user " + userId.uuid;
   }
 }
