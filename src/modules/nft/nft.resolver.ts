@@ -8,6 +8,9 @@ import { UserOutput } from '../user/dto/user.output';
 import { NftInput } from './dto/nft.input';
 import { UUIDInput } from 'src/common/uuid.input';
 import { StringOutput } from 'src/common/string.output';
+import { AuthorizationGuard } from '../auth/guards/authorization-guard';
+import { Roles } from 'src/common/role.decorator';
+import { RoleEnum } from 'src/common/roles.enum';
 
 @Resolver(() => NftOutput)
 export class NftResolver {
@@ -25,5 +28,12 @@ export class NftResolver {
   @Mutation(() => StringOutput)
   deleteNft(@GetUser() user: UserOutput, @Args('input') nftId: UUIDInput) {
     return this.nftService.deleteNftById(user, nftId.uuid);
+  }
+
+  @UseGuards(GqlAuth, AuthorizationGuard)
+  @Roles(RoleEnum.ADMIN)
+  @Mutation(() => StringOutput)
+  deleteNftAdmin(@Args('input') nftId: UUIDInput) {
+    return this.nftService.deleteNftByIdAdmin(nftId.uuid);
   }
 }
