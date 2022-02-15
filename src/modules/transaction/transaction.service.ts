@@ -35,10 +35,11 @@ export class TransactionService {
       await queryRunner.manager.save(Object.assign(new TransactionEntity(), 
         { nft: nft, from: userFrom, amount: nft.price }));
       await queryRunner.commitTransaction();
+      return { message: "Successfully bought NFT with ID: " + nftId };
     } catch (err) {
       // since we have errors lets rollback the changes we made
-      console.log(err)
       await queryRunner.rollbackTransaction();
+      return { message: "Error encountered: " + err };
     } finally {
       // you need to release a queryRunner which was manually instantiated
       await queryRunner.release();

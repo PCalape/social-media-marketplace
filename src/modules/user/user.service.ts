@@ -24,9 +24,11 @@ export class UserService {
 
   async deleteUserById(userId: string) {
     await this.userRepository.softDelete(userId);
+    return { message: "Successfully deleted user " + userId };
   }
 
   async restoreUserById(userId: string) {
     await this.userRepository.restore(userId);
+    return { message: "Successfully restored user " + userId };
   }
 }

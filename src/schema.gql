@@ -23,6 +23,10 @@ type UserWalletBalance {
   balance: Float!
 }
 
+type StringOutput {
+  message: String!
+}
+
 type AuthCredentialsOutput {
   accessToken: String!
 }
@@ -59,12 +63,12 @@ input AuthCredentialsInput {
 
 type Mutation {
   updateProfile(input: UserInput!): UserOutput!
-  deleteUser(input: UUIDInput!): String!
-  restoreUser(input: UUIDInput!): String!
+  deleteUser(input: UUIDInput!): StringOutput!
+  restoreUser(input: UUIDInput!): StringOutput!
   register(input: RegisterUserInput!): UserOutput!
   createNft(input: NftInput!): NftOutput!
-  deleteNft(input: UUIDInput!): String!
-  buyNft(input: UUIDInput!): String!
+  deleteNft(input: UUIDInput!): StringOutput!
+  buyNft(input: UUIDInput!): StringOutput!
 }
 
 input UserInput {

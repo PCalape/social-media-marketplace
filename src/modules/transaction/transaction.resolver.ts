@@ -1,6 +1,7 @@
 import { UseGuards } from '@nestjs/common';
 import { Resolver, Mutation, Args } from '@nestjs/graphql';
 import { GetUser } from 'src/common/get-user.decorator';
+import { StringOutput } from 'src/common/string.output';
 import { UUIDInput } from 'src/common/uuid.input';
 import { GqlAuth } from '../auth/guards/auth-gql.guard';
 import { UserOutput } from '../user/dto/user.output';
@@ -14,9 +15,8 @@ export class TransactionResolver {
   ) {}
 
   @UseGuards(GqlAuth)
-  @Mutation(() => String)
+  @Mutation(() => StringOutput)
   buyNft(@GetUser() user: UserOutput, @Args('input') nftId: UUIDInput) {
-    this.transactionService.createTransaction(user, nftId.uuid);
-    return "Successfully bought NFT with ID: " + nftId.uuid;
+    return this.transactionService.createTransaction(user, nftId.uuid);
   }
 }

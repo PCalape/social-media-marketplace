@@ -7,6 +7,7 @@ import { NftService } from './nft.service';
 import { UserOutput } from '../user/dto/user.output';
 import { NftInput } from './dto/nft.input';
 import { UUIDInput } from 'src/common/uuid.input';
+import { StringOutput } from 'src/common/string.output';
 
 @Resolver(() => NftOutput)
 export class NftResolver {
@@ -21,9 +22,8 @@ export class NftResolver {
   }
 
   @UseGuards(GqlAuth)
-  @Mutation(() => String)
+  @Mutation(() => StringOutput)
   deleteNft(@GetUser() user: UserOutput, @Args('input') nftId: UUIDInput) {
-    this.nftService.deleteNftById(user, nftId.uuid);
-    return "Successfully deleted nft " + nftId;
+    return this.nftService.deleteNftById(user, nftId.uuid);
   }
 }

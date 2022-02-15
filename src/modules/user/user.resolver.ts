@@ -10,6 +10,7 @@ import { AuthorizationGuard } from '../auth/guards/authorization-guard';
 import { UserWalletBalance } from './dto/user.wallet.balance';
 import { UserInput } from './dto/user.input';
 import { UUIDInput } from 'src/common/uuid.input';
+import { StringOutput } from 'src/common/string.output';
 
 @Resolver(() => UserOutput)
 export class UserResolver {
@@ -50,17 +51,15 @@ export class UserResolver {
 
   @UseGuards(GqlAuth, AuthorizationGuard)
   @Roles(RoleEnum.ADMIN)
-  @Mutation(() => String)
+  @Mutation(() => StringOutput)
   deleteUser(@Args('input') userId: UUIDInput) {
-    this.userService.deleteUserById(userId.uuid);
-    return "Successfully deleted user " + userId.uuid;
+    return this.userService.deleteUserById(userId.uuid);
   }
 
   @UseGuards(GqlAuth, AuthorizationGuard)
   @Roles(RoleEnum.ADMIN)
-  @Mutation(() => String)
+  @Mutation(() => StringOutput)
   restoreUser(@Args('input') userId: UUIDInput) {
-    this.userService.restoreUserById(userId.uuid);
-    return "Successfully restored user " + userId.uuid;
+    return this.userService.restoreUserById(userId.uuid);
   }
 }

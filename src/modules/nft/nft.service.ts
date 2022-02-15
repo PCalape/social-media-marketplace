@@ -24,5 +24,6 @@ export class NftService {
     if (!nft) throw new BadRequestException('Nft not found');
     if (nft.user.id !== user.id) throw new ForbiddenException('Method not allowed');
     await this.nftRepository.softDelete(nftId);
+    return { message: "Successfully deleted nft " + nftId };
   }
 }
