@@ -26,7 +26,7 @@ export class CommentResolver {
 
   @UseGuards(GqlAuth)
   @Query(() => PaginationOutput)
-  getCommentsInNft(@Args('pagination') { offset, limit }: PaginationParams,
+  getCommentsInNft(@Args('pagination', { nullable: true }) { offset, limit }: PaginationParams,
                     @Args('input') nftId: UUIDInput) {
     return this.commentService.findComments(offset, limit, nftId.uuid);
   }
