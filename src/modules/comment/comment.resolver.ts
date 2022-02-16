@@ -9,6 +9,8 @@ import { CommentInput } from './dto/comment.input';
 import { UUIDInput } from 'src/common/uuid.input';
 import { CommentUpdate } from './dto/comment.update';
 import { StringOutput } from 'src/common/string.output';
+import { PaginationOutput } from 'src/common/pagination.output';
+import { PaginationParams } from 'src/common/pagination.input';
 
 @Resolver(() => CommentOutput)
 export class CommentResolver {
@@ -23,9 +25,10 @@ export class CommentResolver {
   }
 
   @UseGuards(GqlAuth)
-  @Query(() => [CommentOutput])
-  getCommentsInNft(@Args('input') nftId: UUIDInput) {
-    return this.commentService.findComments(nftId.uuid);
+  @Query(() => PaginationOutput)
+  getCommentsInNft(@Args('pagination') { offset, limit }: PaginationParams,
+                    @Args('input') nftId: UUIDInput) {
+    return this.commentService.findComments(offset, limit, nftId.uuid);
   }
 
   @UseGuards(GqlAuth)

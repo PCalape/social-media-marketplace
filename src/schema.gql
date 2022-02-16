@@ -32,8 +32,13 @@ type AuthCredentialsOutput {
 }
 
 type CommentOutput {
-  id: ID!
+  id: String!
   comment: String!
+}
+
+type PaginationOutput {
+  output: [CommentOutput!]!
+  total: Float!
 }
 
 type NftOutput {
@@ -53,7 +58,7 @@ type Query {
   viewBalance: [UserWalletBalance!]!
   login(input: AuthCredentialsInput!): AuthCredentialsOutput!
   getNft(input: UUIDInput!): NftOutput!
-  getCommentsInNft(input: UUIDInput!): [CommentOutput!]!
+  getCommentsInNft(pagination: PaginationParams!, input: UUIDInput!): PaginationOutput!
 }
 
 input UUIDInput {
@@ -63,6 +68,11 @@ input UUIDInput {
 input AuthCredentialsInput {
   username: String!
   password: String!
+}
+
+input PaginationParams {
+  offset: Float!
+  limit: Float!
 }
 
 type Mutation {

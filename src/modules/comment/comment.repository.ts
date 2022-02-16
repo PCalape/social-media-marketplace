@@ -1,10 +1,12 @@
 import { CommentEntity } from './entity/comment.entity';
-import { EntityRepository, Repository, Not, Equal } from 'typeorm';
-import { NftEntity } from '../nft/entity/nft.entity';
+import { EntityRepository, Repository } from 'typeorm';
 
 @EntityRepository(CommentEntity)
 export class CommentRepository extends Repository<CommentEntity> {
-  async findCommentsInNft(nftId: string) {
-    return await super.find({ nft: {id: nftId} });
+  async findCommentsInNft(offset: number, limit: number, nftId: string) {
+    const [output, total] = await super.findAndCount({ where: { nft: {id: nftId}}, 
+      skip: offset, 
+      take: limit });
+    return {output: output, total: total};
   }
 }

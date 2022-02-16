@@ -17,10 +17,10 @@ export class CommentService {
     return await this.commentRepository.save({ nft: nft, comment: input.comment, user: user });
   }
 
-  async findComments(nftId: string) {
+  async findComments(offset: number, limit: number, nftId: string) {
     const nft = await this.nftService.findNftById(nftId);
     if (!nft) throw new BadRequestException('Nft not found');
-    return await this.commentRepository.findCommentsInNft(nftId);
+    return await this.commentRepository.findCommentsInNft(offset, limit, nftId);
   }
 
   async updateComment(user: UserOutput, input: CommentUpdate) {
