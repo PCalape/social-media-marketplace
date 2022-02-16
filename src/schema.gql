@@ -32,7 +32,7 @@ type AuthCredentialsOutput {
 }
 
 type CommentOutput {
-  id: String!
+  id: ID!
   comment: String!
 }
 
@@ -43,7 +43,7 @@ type NftOutput {
   category: String!
   price: Float!
   user: UserOutput!
-  comments: CommentOutput
+  comments: [CommentOutput!]
 }
 
 type Query {

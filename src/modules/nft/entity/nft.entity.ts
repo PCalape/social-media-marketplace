@@ -30,7 +30,7 @@ export class NftEntity extends BaseEntity {
   user: UserEntity;
 
   //connection to comment
-  @OneToMany(type => CommentEntity, comment => comment.nft, {eager: true})
+  @OneToMany(type => CommentEntity, comment => comment.nft, { eager: true })
   comments: CommentEntity[]
 
   @OneToMany(type => TransactionEntity, transaction => transaction.nft)

@@ -8,9 +8,6 @@ import { UserOutput } from '../user/dto/user.output';
 import { NftInput } from './dto/nft.input';
 import { UUIDInput } from 'src/common/uuid.input';
 import { StringOutput } from 'src/common/string.output';
-import { AuthorizationGuard } from '../auth/guards/authorization-guard';
-import { Roles } from 'src/common/role.decorator';
-import { RoleEnum } from 'src/common/roles.enum';
 
 @Resolver(() => NftOutput)
 export class NftResolver {

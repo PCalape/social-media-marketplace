@@ -1,10 +1,12 @@
-import { ObjectType, Field } from '@nestjs/graphql';
+import { ObjectType, ID } from '@nestjs/graphql';
+import { FilterableField, IDField, KeySet } from '@nestjs-query/query-graphql';
 
 @ObjectType()
+@KeySet(['id'])
 export class CommentOutput {
-  @Field()
+  @IDField(() => ID)
   id: string
 
-  @Field()
+  @FilterableField()
   comment: string;
 }
