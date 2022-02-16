@@ -12,12 +12,10 @@ export class NftService {
     return await this.nftRepository.save({ ...nft, user: user });
   }
 
-  async findNfts(nftId: string) {
-    return await this.nftRepository.findNfts(nftId);
-  }
-
   async findNftById(nftId: string) {
-    return await this.nftRepository.findOne(nftId);
+    const nft = await this.nftRepository.findOneNft(nftId);
+    if (!nft) throw new BadRequestException('Nft not found');
+    return nft;
   }
 
   async deleteNftById(user: UserOutput, nftId: string) {

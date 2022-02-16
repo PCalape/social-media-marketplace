@@ -4,6 +4,7 @@ import { UserOutput } from '../user/dto/user.output';
 import { CommentRepository } from './comment.repository';
 import { CommentInput } from './dto/comment.input';
 import { CommentUpdate } from './dto/comment.update';
+import { CommentEntity } from './entity/comment.entity';
 
 @Injectable()
 export class CommentService {
@@ -16,8 +17,10 @@ export class CommentService {
     return await this.commentRepository.save({ nft: nft, comment: input.comment, user: user });
   }
 
-  async findComments() {
-    return await this.commentRepository.find();
+  async findComments(nftId: string) {
+    const nft = await this.nftService.findNftById(nftId);
+    if (!nft) throw new BadRequestException('Nft not found');
+    return await this.commentRepository.findCommentsInNft(nftId);
   }
 
   async updateComment(user: UserOutput, input: CommentUpdate) {

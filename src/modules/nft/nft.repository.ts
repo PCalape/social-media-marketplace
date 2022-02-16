@@ -3,7 +3,7 @@ import { EntityRepository, Repository, Not } from 'typeorm';
 
 @EntityRepository(NftEntity)
 export class NftRepository extends Repository<NftEntity> {
-  async findNfts(nftId: string) {
-    return await super.find({ id: Not(nftId) });
+  async findOneNft(nftId: string) {
+    return await super.findOne({ relations: ['comments'], where: { id: nftId } });
   }
 }

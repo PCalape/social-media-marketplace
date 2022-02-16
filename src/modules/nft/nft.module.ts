@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { NftService } from './nft.service';
 import { NftResolver } from './nft.resolver';
 import { NftRepository } from './nft.repository';
@@ -8,7 +8,7 @@ import { UserModule } from '../user/user.module';
 @Module({
   imports: [
     TypeOrmModule.forFeature([NftRepository]),
-    UserModule
+    UserModule,
   ],
   providers: [NftService, NftResolver],
   exports: [NftService, TypeOrmModule.forFeature([NftRepository])],

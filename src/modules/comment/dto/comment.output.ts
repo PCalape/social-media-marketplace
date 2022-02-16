@@ -1,8 +1,8 @@
 import { ObjectType, ID } from '@nestjs/graphql';
-import { FilterableField, IDField, KeySet } from '@nestjs-query/query-graphql';
+import { FilterableField, IDField, PagingStrategies, QueryOptions } from '@nestjs-query/query-graphql';
 
 @ObjectType()
-@KeySet(['id'])
+// @QueryOptions({ pagingStrategy: PagingStrategies.OFFSET })
 export class CommentOutput {
   @IDField(() => ID)
   id: string

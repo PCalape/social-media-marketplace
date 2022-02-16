@@ -53,6 +53,7 @@ type Query {
   viewBalance: [UserWalletBalance!]!
   login(input: AuthCredentialsInput!): AuthCredentialsOutput!
   getNft(input: UUIDInput!): NftOutput!
+  getCommentsInNft(input: UUIDInput!): [CommentOutput!]!
 }
 
 input UUIDInput {

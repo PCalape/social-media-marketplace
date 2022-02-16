@@ -23,6 +23,12 @@ export class CommentResolver {
   }
 
   @UseGuards(GqlAuth)
+  @Query(() => [CommentOutput])
+  getCommentsInNft(@Args('input') nftId: UUIDInput) {
+    return this.commentService.findComments(nftId.uuid);
+  }
+
+  @UseGuards(GqlAuth)
   @Mutation(() => CommentOutput)
   updateComment(@GetUser() user: UserOutput, @Args('input') input: CommentUpdate) {
     return this.commentService.updateComment(user, input);
