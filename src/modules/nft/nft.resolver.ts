@@ -30,10 +30,9 @@ export class NftResolver {
     return this.nftService.deleteNftById(user, nftId.uuid);
   }
 
-  // @UseGuards(GqlAuth, AuthorizationGuard)
-  // @Roles(RoleEnum.ADMIN)
-  // @Mutation(() => StringOutput)
-  // deleteNftAdmin(@Args('input') nftId: UUIDInput) {
-  //   return this.nftService.deleteNftByIdAdmin(nftId.uuid);
-  // }
+  @UseGuards(GqlAuth)
+  @Query(() => NftOutput)
+  getNft(@Args('input') nftId: UUIDInput) {
+    return this.nftService.findNftById(nftId.uuid);
+  }
 }

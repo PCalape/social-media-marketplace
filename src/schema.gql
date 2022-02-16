@@ -42,6 +42,8 @@ type NftOutput {
   description: String!
   category: String!
   price: Float!
+  user: UserOutput!
+  comments: CommentOutput
 }
 
 type Query {
@@ -50,6 +52,7 @@ type Query {
   getUserById(input: UUIDInput!): [UserOutput!]!
   viewBalance: [UserWalletBalance!]!
   login(input: AuthCredentialsInput!): AuthCredentialsOutput!
+  getNft(input: UUIDInput!): NftOutput!
 }
 
 input UUIDInput {

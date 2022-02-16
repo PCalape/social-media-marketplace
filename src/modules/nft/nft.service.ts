@@ -32,11 +32,4 @@ export class NftService {
     await this.nftRepository.softDelete(nftId);
     return { message: "Successfully deleted nft " + nftId };
   }
-
-  // async deleteNftByIdAdmin(nftId: string) {
-  //   const nft = await this.nftRepository.findOne(nftId);
-  //   if (!nft) throw new BadRequestException('Nft not found');
-  //   await this.nftRepository.softDelete(nftId);
-  //   return { message: "Successfully deleted nft " + nftId };
-  // }
 }
