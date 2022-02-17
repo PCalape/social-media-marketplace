@@ -47,6 +47,7 @@ type PaginationOutput {
 }
 
 type NftOutput {
+  id: String!
   image: String!
   title: String!
   description: String!

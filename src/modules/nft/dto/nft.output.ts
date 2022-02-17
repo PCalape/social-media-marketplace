@@ -5,6 +5,9 @@ import { UserOutput } from 'src/modules/user/dto/user.output';
 @ObjectType()
 export class NftOutput {
   @Field()
+  id: string;
+
+  @Field()
   image: string;
 
   @Field()
