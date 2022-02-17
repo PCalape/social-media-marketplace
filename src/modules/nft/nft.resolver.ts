@@ -35,4 +35,11 @@ export class NftResolver {
         @Args('input') nftId: UUIDInput) {
     return this.nftService.findNftByIdPage(pagination, nftId.uuid);
   }
+
+  @UseGuards(GqlAuth)
+  @Query(() => NftPaginationOutput)
+  getNfts(@Args('pagination', { nullable: true }) pagination: PaginationParams,
+        @Args('search') search: string) {
+    return this.nftService.findNfts(pagination, search);
+  }
 }

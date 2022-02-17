@@ -33,6 +33,10 @@ export class NftService {
     };
   }
 
+  async findNfts(pagination: PaginationParams, search: string) {
+    return await this.nftRepository.findNfts(pagination, search);
+  }
+
   async deleteNftById(user: UserOutput, nftId: string) {
     const nft = await this.nftRepository.findOne(nftId);
     if (!nft) throw new BadRequestException('Nft not found');

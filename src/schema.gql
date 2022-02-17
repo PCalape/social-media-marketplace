@@ -75,6 +75,7 @@ type Query {
   viewBalance: [UserWalletBalance!]!
   login(input: AuthCredentialsInput!): AuthCredentialsOutput!
   getNft(pagination: PaginationParams, input: UUIDInput!): NftPaginationOutput!
+  getNfts(pagination: PaginationParams, search: String!): NftPaginationOutput!
   getCommentsInNft(pagination: PaginationParams, input: UUIDInput!): CommentPaginationOutput!
 }
 
