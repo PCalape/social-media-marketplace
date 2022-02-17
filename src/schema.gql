@@ -53,6 +53,7 @@ type NftOutput {
   category: String!
   price: Float!
   user: UserOutput!
+  creator: UserOutput!
   comments: [CommentOutput!]
 }
 

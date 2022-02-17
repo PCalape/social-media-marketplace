@@ -22,6 +22,9 @@ export class NftOutput {
   @Field(() => UserOutput)
   user: UserOutput;
 
+  @Field(() => UserOutput)
+  creator: UserOutput;
+
   @Field(() => [CommentOutput], {nullable: true})
   comments: CommentOutput[];
 }

@@ -9,7 +9,7 @@ export class NftService {
   constructor(private readonly nftRepository: NftRepository) {}
 
   async createNft(user: UserOutput, nft: NftInput) {
-    return await this.nftRepository.save({ ...nft, user: user });
+    return await this.nftRepository.save({ ...nft, user: user, creator: user });
   }
 
   async findNftById(nftId: string) {

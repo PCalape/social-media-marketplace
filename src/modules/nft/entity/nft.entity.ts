@@ -29,10 +29,15 @@ export class NftEntity extends BaseEntity {
   @ManyToOne(type => UserEntity, user => user.nfts, { eager: true })
   user: UserEntity;
 
+  //connection to creator
+  @ManyToOne(type => UserEntity, creator => creator.nftsCreated, { eager: true })
+  creator: UserEntity;
+
   //connection to comment
   @OneToMany(type => CommentEntity, comment => comment.nft)
   comments: CommentEntity[]
 
+  //connection to transaction
   @OneToMany(type => TransactionEntity, transaction => transaction.nft)
   transactions: TransactionEntity[]
 }

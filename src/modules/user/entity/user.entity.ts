@@ -47,6 +47,10 @@ export class UserEntity extends BaseEntity {
   @OneToMany(type => NftEntity, nft => nft.user)
   nfts: NftEntity[]
 
+  //connection to nft as creator
+  @OneToMany(type => NftEntity, nftsCreated => nftsCreated.creator)
+  nftsCreated: NftEntity[]
+
   //connection to comment
   @OneToMany(type => CommentEntity, comment => comment.user)
   comments: CommentEntity[]
