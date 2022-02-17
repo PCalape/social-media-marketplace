@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { UserInput } from './dto/user.input';
 import { UserRepository } from './user.repository';
 
@@ -23,12 +23,16 @@ export class UserService {
   }
 
   async deleteUserById(userId: string) {
+    const user = await this.userRepository.viewProfile(userId);
+    if (!user) throw new BadRequestException('User not found');
     await this.userRepository.softDelete(userId);
     return { message: "Successfully deleted user " + userId };
   }
 
   async restoreUserById(userId: string) {
     await this.userRepository.restore(userId);
+    const user = await this.userRepository.viewProfile(userId);
+    if (!user) throw new BadRequestException('User not found');
     return { message: "Successfully restored user " + userId };
   }
 }
