@@ -39,6 +39,11 @@ type CommentOutput {
 type PaginationOutput {
   output: [CommentOutput!]!
   total: Float!
+  count: Float!
+  offset: Float!
+  limit: Float!
+  currentPage: Float!
+  totalPage: Float!
 }
 
 type NftOutput {
@@ -71,7 +76,7 @@ input AuthCredentialsInput {
 }
 
 input PaginationParams {
-  offset: Float
+  page: Float
   limit: Float
 }
 

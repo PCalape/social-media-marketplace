@@ -1,4 +1,5 @@
 import { BadRequestException, ForbiddenException, Injectable } from '@nestjs/common';
+import { PaginationParams } from 'src/common/pagination.input';
 import { NftService } from '../nft/nft.service';
 import { UserOutput } from '../user/dto/user.output';
 import { CommentRepository } from './comment.repository';
@@ -17,10 +18,10 @@ export class CommentService {
     return await this.commentRepository.save({ nft: nft, comment: input.comment, user: user });
   }
 
-  async findComments(offset: number, limit: number, nftId: string) {
+  async findComments(pagination: PaginationParams, nftId: string) {
     const nft = await this.nftService.findNftById(nftId);
     if (!nft) throw new BadRequestException('Nft not found');
-    return await this.commentRepository.findCommentsInNft(offset, limit, nftId);
+    return await this.commentRepository.findCommentsInNft(pagination, nftId);
   }
 
   async updateComment(user: UserOutput, input: CommentUpdate) {

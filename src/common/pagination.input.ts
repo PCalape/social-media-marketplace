@@ -7,9 +7,9 @@ export class PaginationParams {
   @IsOptional()
   @Type(() => Number)
   @IsNumber()
-  @Min(0)
+  @Min(1)
   @Field({ nullable: true })
-  offset?: number;
+  page?: number;
  
   @IsOptional()
   @Type(() => Number)
