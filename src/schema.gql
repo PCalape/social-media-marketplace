@@ -36,7 +36,7 @@ type CommentOutput {
   comment: String!
 }
 
-type PaginationOutput {
+type CommentPaginationOutput {
   output: [CommentOutput!]!
   total: Float!
   count: Float!
@@ -65,7 +65,7 @@ type Query {
   viewBalance: [UserWalletBalance!]!
   login(input: AuthCredentialsInput!): AuthCredentialsOutput!
   getNft(input: UUIDInput!): NftOutput!
-  getCommentsInNft(pagination: PaginationParams, input: UUIDInput!): PaginationOutput!
+  getCommentsInNft(pagination: PaginationParams, input: UUIDInput!): CommentPaginationOutput!
 }
 
 input UUIDInput {

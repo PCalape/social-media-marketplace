@@ -1,11 +1,11 @@
 import { CommentEntity } from './entity/comment.entity';
 import { EntityRepository, Repository } from 'typeorm';
 import { PaginationParams } from 'src/common/pagination.input';
-import { PaginationOutput } from 'src/common/pagination.output';
+import { CommentPaginationOutput } from './dto/comment.pagination.output';
 
 @EntityRepository(CommentEntity)
 export class CommentRepository extends Repository<CommentEntity> {
-  async findCommentsInNft(pagination: PaginationParams, nftId: string): Promise<PaginationOutput> {
+  async findCommentsInNft(pagination: PaginationParams, nftId: string): Promise<CommentPaginationOutput> {
     const take = pagination.limit || 5;
     const page = pagination.page || 1;
     const skip= (page-1) * take ;
@@ -18,7 +18,7 @@ export class CommentRepository extends Repository<CommentEntity> {
     return this.paginateResponse(data, page, take);
   }
 
-  paginateResponse(data: [CommentEntity[], number], page: number, limit: number): PaginationOutput {
+  paginateResponse(data: [CommentEntity[], number], page: number, limit: number): CommentPaginationOutput {
     const [output, total] = data;
     const lastPage = Math.ceil(total/limit);
     const count = output.length;

@@ -2,7 +2,7 @@ import { Field, InputType, ObjectType } from '@nestjs/graphql';
 import { CommentOutput } from 'src/modules/comment/dto/comment.output';
 
 @ObjectType()
-export class PaginationOutput {
+export class CommentPaginationOutput {
 
   @Field(() => [CommentOutput])
   output: CommentOutput[];

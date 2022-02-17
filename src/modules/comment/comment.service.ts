@@ -5,7 +5,6 @@ import { UserOutput } from '../user/dto/user.output';
 import { CommentRepository } from './comment.repository';
 import { CommentInput } from './dto/comment.input';
 import { CommentUpdate } from './dto/comment.update';
-import { CommentEntity } from './entity/comment.entity';
 
 @Injectable()
 export class CommentService {
