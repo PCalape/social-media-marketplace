@@ -58,13 +58,23 @@ type NftOutput {
   comments: [CommentOutput!]
 }
 
+type NftPaginationOutput {
+  output: [NftOutput!]!
+  total: Float!
+  count: Float!
+  offset: Float!
+  limit: Float!
+  currentPage: Float!
+  totalPage: Float!
+}
+
 type Query {
   getUsers: [UserOutput!]!
   viewProfile: [UserOutput!]!
   getUserById(input: UUIDInput!): [UserOutput!]!
   viewBalance: [UserWalletBalance!]!
   login(input: AuthCredentialsInput!): AuthCredentialsOutput!
-  getNft(input: UUIDInput!): NftOutput!
+  getNft(pagination: PaginationParams, input: UUIDInput!): NftPaginationOutput!
   getCommentsInNft(pagination: PaginationParams, input: UUIDInput!): CommentPaginationOutput!
 }
 

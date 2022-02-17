@@ -1,4 +1,4 @@
-import { BadRequestException, ForbiddenException, Injectable } from '@nestjs/common';
+import { BadRequestException, ForbiddenException, forwardRef, Inject, Injectable } from '@nestjs/common';
 import { PaginationParams } from 'src/common/pagination.input';
 import { NftService } from '../nft/nft.service';
 import { UserOutput } from '../user/dto/user.output';
@@ -9,7 +9,7 @@ import { CommentUpdate } from './dto/comment.update';
 @Injectable()
 export class CommentService {
   constructor(private readonly commentRepository: CommentRepository,
-              private readonly nftService: NftService) {}
+    @Inject(forwardRef(() => NftService)) private readonly nftService: NftService) {}
 
   async createComment(user: UserOutput, input: CommentInput) {
     const nft = await this.nftService.findNftById(input.nftId);
