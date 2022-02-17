@@ -33,8 +33,8 @@ export class NftService {
     };
   }
 
-  async findNfts(pagination: PaginationParams, search: string) {
-    return await this.nftRepository.findNfts(pagination, search);
+  async findNfts(pagination: PaginationParams) {
+    return await this.nftRepository.findNfts(pagination);
   }
 
   async deleteNftById(user: UserOutput, nftId: string) {

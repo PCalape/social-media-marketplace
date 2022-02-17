@@ -1,5 +1,5 @@
 import { NftEntity } from './entity/nft.entity';
-import { EntityRepository, Repository, Not } from 'typeorm';
+import { EntityRepository, Repository, Not, Like } from 'typeorm';
 import { PaginationParams } from 'src/common/pagination.input';
 import { NftPaginationOutput } from './dto/nft.pagination.output';
 
@@ -9,16 +9,25 @@ export class NftRepository extends Repository<NftEntity> {
     return await super.findOne({ relations: ['comments'], where: { id: nftId } });
   }
 
-  async findNfts(pagination: PaginationParams, search: string): Promise<NftPaginationOutput> {
+  async findNfts(pagination: PaginationParams): Promise<NftPaginationOutput> {
     const take = pagination.limit || 5;
     const page = pagination.page || 1;
     const skip= (page-1) * take ;
+    const search = pagination.search || '';
+    const sortBy = pagination.sortBy || 'createdAt';
+    const direction = pagination.direction || 'DESC';
 
     const data = await super.findAndCount({ 
-      where: {}, 
+      where: [
+        { title: Like(`%${search}%`) },
+        { description: Like(`%${search}%`) },
+        { category: Like(`%${search}%`) },
+        // `title like '%${search}%'`
+        // { creator: {username: search }},
+      ], 
       skip: skip, 
       take: take,
-      order: {updatedAt: 'DESC'} });
+      order: {[sortBy]: direction} });
     return this.paginateResponse(data, page, take);
   }
 

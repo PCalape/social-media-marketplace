@@ -75,7 +75,7 @@ type Query {
   viewBalance: [UserWalletBalance!]!
   login(input: AuthCredentialsInput!): AuthCredentialsOutput!
   getNft(pagination: PaginationParams, input: UUIDInput!): NftPaginationOutput!
-  getNfts(pagination: PaginationParams, search: String!): NftPaginationOutput!
+  getNfts(pagination: PaginationParams): NftPaginationOutput!
   getCommentsInNft(pagination: PaginationParams, input: UUIDInput!): CommentPaginationOutput!
 }
 
@@ -91,6 +91,26 @@ input AuthCredentialsInput {
 input PaginationParams {
   page: Float
   limit: Float
+  search: String
+  sortBy: NftSortEnum
+  direction: NftDirectionEnum
+}
+
+"""NftSort"""
+enum NftSortEnum {
+  TITLE
+  DESCRIPTION
+  CATEGORY
+  USER
+  CREATOR
+  CREATED_AT
+  UPDATED_AT
+}
+
+"""NftDirection"""
+enum NftDirectionEnum {
+  ASC
+  DESC
 }
 
 type Mutation {

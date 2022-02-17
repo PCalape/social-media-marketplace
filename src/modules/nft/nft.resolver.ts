@@ -10,6 +10,7 @@ import { UUIDInput } from 'src/common/uuid.input';
 import { StringOutput } from 'src/common/string.output';
 import { PaginationParams } from 'src/common/pagination.input';
 import { NftPaginationOutput } from './dto/nft.pagination.output';
+import { NftSortEnum } from 'src/common/nftsort.enum';
 
 @Resolver(() => NftOutput)
 export class NftResolver {
@@ -38,8 +39,7 @@ export class NftResolver {
 
   @UseGuards(GqlAuth)
   @Query(() => NftPaginationOutput)
-  getNfts(@Args('pagination', { nullable: true }) pagination: PaginationParams,
-        @Args('search') search: string) {
-    return this.nftService.findNfts(pagination, search);
+  getNfts(@Args('pagination', { nullable: true }) pagination: PaginationParams) {
+    return this.nftService.findNfts(pagination);
   }
 }
