@@ -18,12 +18,17 @@ export class NftRepository extends Repository<NftEntity> {
     const direction = pagination.direction || 'DESC';
 
     const data = await super.findAndCount({ 
+      relations: ["user", "creator"],
       where: [
         { title: Like(`%${search}%`) },
         { description: Like(`%${search}%`) },
         { category: Like(`%${search}%`) },
-        // `title like '%${search}%'`
-        // { creator: {username: search }},
+        { user: {username: Like(`%${search}%`)} },
+        { user: {firstName: Like(`%${search}%`)} },
+        { user: {lastName: Like(`%${search}%`)} },
+        { creator: {username: Like(`%${search}%`)} },
+        { creator: {firstName: Like(`%${search}%`)} },
+        { creator: {lastName: Like(`%${search}%`)} },
       ], 
       skip: skip, 
       take: take,
