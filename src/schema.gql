@@ -55,37 +55,7 @@ type NftOutput {
   price: Float!
   user: UserOutput!
   creator: UserOutput!
-  comments: [CommentOutput!]
-}
-
-type NftPaginationOutput {
-  output: [NftOutput!]!
-  total: Float!
-  count: Float!
-  offset: Float!
-  limit: Float!
-  currentPage: Float!
-  totalPage: Float!
-}
-
-type Query {
-  getUsers: [UserOutput!]!
-  viewProfile: [UserOutput!]!
-  getUserById(input: UUIDInput!): [UserOutput!]!
-  viewBalance: [UserWalletBalance!]!
-  login(input: AuthCredentialsInput!): AuthCredentialsOutput!
-  getNft(pagination: PaginationParams, input: UUIDInput!): NftPaginationOutput!
-  getNfts(pagination: PaginationParams): NftPaginationOutput!
-  getCommentsInNft(pagination: PaginationParams, input: UUIDInput!): CommentPaginationOutput!
-}
-
-input UUIDInput {
-  uuid: String!
-}
-
-input AuthCredentialsInput {
-  username: String!
-  password: String!
+  comments(pagination: PaginationParams): CommentPaginationOutput!
 }
 
 input PaginationParams {
@@ -111,6 +81,36 @@ enum NftSortEnum {
 enum NftDirectionEnum {
   ASC
   DESC
+}
+
+type NftPaginationOutput {
+  output: [NftOutput!]!
+  total: Float!
+  count: Float!
+  offset: Float!
+  limit: Float!
+  currentPage: Float!
+  totalPage: Float!
+}
+
+type Query {
+  getUsers: [UserOutput!]!
+  viewProfile: [UserOutput!]!
+  getUserById(input: UUIDInput!): [UserOutput!]!
+  viewBalance: [UserWalletBalance!]!
+  login(input: AuthCredentialsInput!): AuthCredentialsOutput!
+  getNft(input: UUIDInput!): NftOutput!
+  getNfts(pagination: PaginationParams): NftPaginationOutput!
+  getCommentsInNft(pagination: PaginationParams, input: UUIDInput!): CommentPaginationOutput!
+}
+
+input UUIDInput {
+  uuid: String!
+}
+
+input AuthCredentialsInput {
+  username: String!
+  password: String!
 }
 
 type Mutation {

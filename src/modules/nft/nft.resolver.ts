@@ -1,5 +1,5 @@
 import { UseGuards } from '@nestjs/common';
-import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
+import { Resolver, Query, Args, Mutation, ResolveField, Parent } from '@nestjs/graphql';
 import { GqlAuth } from '../auth/guards/auth-gql.guard';
 import { NftOutput } from './dto/nft.output';
 import { GetUser } from '../../common/get-user.decorator';
@@ -10,12 +10,15 @@ import { UUIDInput } from 'src/common/uuid.input';
 import { StringOutput } from 'src/common/string.output';
 import { PaginationParams } from 'src/common/pagination.input';
 import { NftPaginationOutput } from './dto/nft.pagination.output';
-import { NftSortEnum } from 'src/common/nftsort.enum';
+import { CommentPaginationOutput } from '../comment/dto/comment.pagination.output';
+import { NftEntity } from './entity/nft.entity';
+import { CommentService } from '../comment/comment.service';
 
 @Resolver(() => NftOutput)
 export class NftResolver {
   constructor(
     private readonly nftService: NftService,
+    private readonly commentService: CommentService,
   ) {}
 
   @UseGuards(GqlAuth)
@@ -31,10 +34,16 @@ export class NftResolver {
   }
 
   @UseGuards(GqlAuth)
-  @Query(() => NftPaginationOutput)
-  getNft(@Args('pagination', { nullable: true }) pagination: PaginationParams,
-        @Args('input') nftId: UUIDInput) {
-    return this.nftService.findNftByIdPage(pagination, nftId.uuid);
+  @Query(() => NftOutput)
+  getNft(@Args('input') nftId: UUIDInput) {
+    return this.nftService.findNftByIdPage(nftId.uuid);
+  }
+
+  @ResolveField('comments', returns => CommentPaginationOutput)
+  async getComments(@Parent() nft: NftEntity,
+                    @Args('pagination', { nullable: true }) pagination: PaginationParams) {
+    const { id } = nft;
+    return await this.commentService.findComments(pagination, id);
   }
 
   @UseGuards(GqlAuth)

@@ -9,7 +9,7 @@ import { CommentUpdate } from './dto/comment.update';
 @Injectable()
 export class CommentService {
   constructor(private readonly commentRepository: CommentRepository,
-    @Inject(forwardRef(() => NftService)) private readonly nftService: NftService) {}
+              private readonly nftService: NftService) {}
 
   async createComment(user: UserOutput, input: CommentInput) {
     const nft = await this.nftService.findNftById(input.nftId);

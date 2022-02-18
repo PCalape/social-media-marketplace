@@ -1,5 +1,6 @@
 import { ObjectType, Field } from '@nestjs/graphql';
 import { CommentOutput } from 'src/modules/comment/dto/comment.output';
+import { CommentPaginationOutput } from 'src/modules/comment/dto/comment.pagination.output';
 import { UserOutput } from 'src/modules/user/dto/user.output';
 
 @ObjectType()
@@ -28,6 +29,6 @@ export class NftOutput {
   @Field(() => UserOutput)
   creator: UserOutput;
 
-  @Field(() => [CommentOutput], {nullable: true})
-  comments: CommentOutput[];
+  @Field(() => CommentPaginationOutput, {nullable: true})
+  comments: CommentPaginationOutput;
 }
