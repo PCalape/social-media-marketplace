@@ -8,7 +8,7 @@ export class CommentRepository extends Repository<CommentEntity> {
   async findCommentsInNft(pagination: PaginationParams, nftId: string): Promise<CommentPaginationOutput> {
     const take = pagination.limit || 5;
     const page = pagination.page || 1;
-    const skip= (page-1) * take ;
+    const skip = (page-1) * take;
 
     const data = await super.findAndCount({ 
       where: { nft: {id: nftId}}, 

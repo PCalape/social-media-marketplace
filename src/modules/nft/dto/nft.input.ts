@@ -1,10 +1,12 @@
 import { ObjectType, Field, InputType } from '@nestjs/graphql';
 import { IsNumber, Min } from 'class-validator';
+import { IsImage } from 'src/common/image.validator';
 
 @InputType()
 export class NftInput {
 
   @Field()
+  @IsImage()
   image: string;
 
   @Field()
