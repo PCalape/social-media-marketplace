@@ -1,6 +1,5 @@
 import { BadRequestException, ForbiddenException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import { async } from 'rxjs';
 import { NftEntity } from '../nft/entity/nft.entity';
 import { NftRepository } from '../nft/nft.repository';
 import { NftService } from '../nft/nft.service';

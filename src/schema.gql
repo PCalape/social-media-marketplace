@@ -96,12 +96,12 @@ type NftPaginationOutput {
 type Query {
   getUsers: [UserOutput!]!
   viewProfile: [UserOutput!]!
-  getUserById(input: UUIDInput!): [UserOutput!]!
+  getUserById(userId: UUIDInput!): [UserOutput!]!
   viewBalance: [UserWalletBalance!]!
   login(input: AuthCredentialsInput!): AuthCredentialsOutput!
-  getNft(input: UUIDInput!): NftOutput!
+  getNft(nftId: UUIDInput!): NftOutput!
   getNfts(pagination: PaginationParams): NftPaginationOutput!
-  getCommentsInNft(pagination: PaginationParams, input: UUIDInput!): CommentPaginationOutput!
+  getCommentsInNft(pagination: PaginationParams, nftId: UUIDInput!): CommentPaginationOutput!
 }
 
 input UUIDInput {
@@ -115,15 +115,15 @@ input AuthCredentialsInput {
 
 type Mutation {
   updateProfile(input: UserInput!): UserOutput!
-  deleteUser(input: UUIDInput!): StringOutput!
-  restoreUser(input: UUIDInput!): StringOutput!
+  deleteUser(userId: UUIDInput!): StringOutput!
+  restoreUser(userId: UUIDInput!): StringOutput!
   register(input: RegisterUserInput!): UserOutput!
   createNft(input: NftInput!): NftOutput!
-  deleteNft(input: UUIDInput!): StringOutput!
+  deleteNft(nftId: UUIDInput!): StringOutput!
   createComment(input: CommentInput!): CommentOutput!
   updateComment(input: CommentUpdate!): CommentOutput!
-  deleteComment(input: UUIDInput!): StringOutput!
-  buyNft(input: UUIDInput!): StringOutput!
+  deleteComment(commentId: UUIDInput!): StringOutput!
+  buyNft(nftId: UUIDInput!): StringOutput!
 }
 
 input UserInput {

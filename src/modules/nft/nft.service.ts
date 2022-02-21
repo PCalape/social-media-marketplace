@@ -20,12 +20,6 @@ export class NftService {
     return nft;
   }
 
-  async findNftByIdPage(nftId: string) {
-    const nft = await this.nftRepository.findOneNft(nftId);
-    if (!nft) throw new BadRequestException('Nft not found');
-    return nft;
-  }
-
   async findNfts(pagination: PaginationParams) {
     return await this.nftRepository.findNfts(pagination);
   }
@@ -39,7 +33,9 @@ export class NftService {
     else if (nft.user.id !== user.id) {
       throw new ForbiddenException('Method not allowed');
     }
-    await this.nftRepository.softDelete(nftId);
+    else {
+      await this.nftRepository.softDelete(nftId);
+    }
     return { message: "Successfully deleted nft " + nftId };
   }
 }

@@ -5,7 +5,7 @@ import { PaginationParams } from 'src/common/pagination.input';
 @EntityRepository(NftEntity)
 export class NftRepository extends Repository<NftEntity> {
   async findOneNft(nftId: string) {
-    return await super.findOne({ relations: ['comments'], where: { id: nftId } });
+    return await super.findOne({ id: nftId });
   }
 
   async findNfts(pagination: PaginationParams) {

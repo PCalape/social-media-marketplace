@@ -36,7 +36,7 @@ export class NftResolver {
   @UseGuards(GqlAuth)
   @Query(() => NftOutput)
   getNft(@Args('nftId') nftId: UUIDInput) {
-    return this.nftService.findNftByIdPage(nftId.uuid);
+    return this.nftService.findNftById(nftId.uuid);
   }
 
   @ResolveField('comments', returns => CommentPaginationOutput)
