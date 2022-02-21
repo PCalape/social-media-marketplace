@@ -16,7 +16,7 @@ export class TransactionResolver {
 
   @UseGuards(GqlAuth)
   @Mutation(() => StringOutput)
-  buyNft(@GetUser() user: UserOutput, @Args('input') nftId: UUIDInput) {
+  buyNft(@GetUser() user: UserOutput, @Args('nftId') nftId: UUIDInput) {
     return this.transactionService.createTransaction(user, nftId.uuid);
   }
 }

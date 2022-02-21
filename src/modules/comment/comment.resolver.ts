@@ -27,7 +27,7 @@ export class CommentResolver {
   @UseGuards(GqlAuth)
   @Query(() => CommentPaginationOutput)
   getCommentsInNft(@Args('pagination', { nullable: true }) pagination: PaginationParams,
-                    @Args('input') nftId: UUIDInput) {
+                    @Args('nftId') nftId: UUIDInput) {
     return this.commentService.findComments(pagination, nftId.uuid);
   }
 
@@ -39,7 +39,7 @@ export class CommentResolver {
 
   @UseGuards(GqlAuth)
   @Mutation(() => StringOutput)
-  deleteComment(@GetUser() user: UserOutput, @Args('input') commentId: UUIDInput) {
+  deleteComment(@GetUser() user: UserOutput, @Args('commentId') commentId: UUIDInput) {
     return this.commentService.deleteComment(user, commentId.uuid);
   }
 }

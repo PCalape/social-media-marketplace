@@ -29,13 +29,13 @@ export class NftResolver {
 
   @UseGuards(GqlAuth)
   @Mutation(() => StringOutput)
-  deleteNft(@GetUser() user: UserOutput, @Args('input') nftId: UUIDInput) {
+  deleteNft(@GetUser() user: UserOutput, @Args('nftId') nftId: UUIDInput) {
     return this.nftService.deleteNftById(user, nftId.uuid);
   }
 
   @UseGuards(GqlAuth)
   @Query(() => NftOutput)
-  getNft(@Args('input') nftId: UUIDInput) {
+  getNft(@Args('nftId') nftId: UUIDInput) {
     return this.nftService.findNftByIdPage(nftId.uuid);
   }
 

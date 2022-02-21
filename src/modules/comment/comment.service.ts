@@ -25,15 +25,15 @@ export class CommentService {
 
   async updateComment(user: UserOutput, input: CommentUpdate) {
     const comment = await this.commentRepository.findOne(input.id);
-    if (comment.user.id !== user.id) throw new ForbiddenException('Method not allowed');
     if (!comment) throw new BadRequestException('Comment not found');
+    if (comment.user.id !== user.id) throw new ForbiddenException('Method not allowed');
     return await this.commentRepository.save( {...comment, comment: input.comment} );
   }
 
   async deleteComment(user: UserOutput, commentId: string) {
     const comment = await this.commentRepository.findOne(commentId);
-    if (comment.user.id !== user.id) throw new ForbiddenException('Method not allowed');
     if (!comment) throw new BadRequestException('Comment not found');
+    if (comment.user.id !== user.id) throw new ForbiddenException('Method not allowed');
     await this.commentRepository.delete(commentId);
     return { message: "Successfully deleted comment " + commentId };
   }

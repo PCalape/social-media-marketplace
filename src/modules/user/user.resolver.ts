@@ -33,7 +33,7 @@ export class UserResolver {
 
   @UseGuards(GqlAuth)
   @Query(() => [UserOutput])
-  getUserById(@Args('input') userId: UUIDInput) {
+  getUserById(@Args('userId') userId: UUIDInput) {
     return this.userService.viewProfile(userId.uuid);
   }
 
@@ -52,14 +52,14 @@ export class UserResolver {
   @UseGuards(GqlAuth, AuthorizationGuard)
   @Roles(RoleEnum.ADMIN)
   @Mutation(() => StringOutput)
-  deleteUser(@Args('input') userId: UUIDInput) {
+  deleteUser(@Args('userId') userId: UUIDInput) {
     return this.userService.deleteUserById(userId.uuid);
   }
 
   @UseGuards(GqlAuth, AuthorizationGuard)
   @Roles(RoleEnum.ADMIN)
   @Mutation(() => StringOutput)
-  restoreUser(@Args('input') userId: UUIDInput) {
+  restoreUser(@Args('userId') userId: UUIDInput) {
     return this.userService.restoreUserById(userId.uuid);
   }
 }
