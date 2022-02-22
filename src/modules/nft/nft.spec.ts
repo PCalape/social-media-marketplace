@@ -6,11 +6,6 @@ import { NftService } from './nft.service';
 import { UserOutput } from '../user/dto/user.output';
 import { UserEntity } from '../user/entity/user.entity';
 import { NftInput } from './dto/nft.input';
-import { NftPaginationOutput } from './dto/nft.pagination.output';
-import { CommentEntity } from '../comment/entity/comment.entity';
-import { TransactionEntity } from '../transaction/entity/transaction.entity';
-import { CommentPaginationOutput } from '../comment/dto/comment.pagination.output';
-import { NftOutput } from './dto/nft.output';
 import { RoleEnum } from 'src/common/roles.enum';
 
 describe('NftService', () => {
