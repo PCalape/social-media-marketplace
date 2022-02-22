@@ -23,8 +23,8 @@ export class TransactionService {
       if (!nft) throw new BadRequestException('NFT not found');
       const userTo = nft.user;
       const [userFrom] = await this.userService.viewProfile(user.id);
-      if (user.id === userTo.id) throw new BadRequestException('NFT is currently owned');
       if (userFrom.balance < nft.price) throw new BadRequestException('Not enough balance');
+      if (user.id === userTo.id) throw new BadRequestException('NFT is currently owned');
       userFrom.decreaseBalance(nft.price);
       userTo.addBalance(nft.price);
       nft.user = userFrom;
