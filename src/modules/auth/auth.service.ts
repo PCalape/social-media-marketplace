@@ -52,7 +52,7 @@ export class AuthService {
     }
     const { id, firstName, lastName, email, gender, role } = user;
     const payload = { id, username, firstName, lastName, email, gender, role };
-    const accessToken: string = await this.jwtService.sign(payload);
+    const accessToken: string = this.jwtService.sign(payload);
     return { accessToken };
   }
 }

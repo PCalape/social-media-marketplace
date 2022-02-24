@@ -1,6 +1,5 @@
-import { BadRequestException } from "@nestjs/common";
 import { Test, TestingModule } from "@nestjs/testing";
-import { Connection, createConnection, getConnection, QueryRunner } from "typeorm";
+import { Connection, QueryRunner } from "typeorm";
 import { NftEntity } from "../nft/entity/nft.entity";
 import { NftRepository } from "../nft/nft.repository";
 import { NftService } from "../nft/nft.service";
@@ -13,11 +12,8 @@ import { TransactionService } from "./transaction.service";
 
 describe('TransactionService', () => {
     let transactionService: TransactionService;
-    let transactionRepository: TransactionRepository;
     let nftService: NftService;
-    let nftRepository: NftRepository;
     let userService: UserService;
-    let userRepository: UserRepository;
     let connection: Connection;
 
     const qr = {
@@ -49,11 +45,8 @@ describe('TransactionService', () => {
         }).compile();
     
         transactionService = await module.resolve(TransactionService);
-        transactionRepository = await module.resolve(TransactionRepository);
         nftService = await module.resolve(NftService);
-        nftRepository = await module.resolve(NftRepository);
         userService = await module.resolve(UserService);
-        userRepository = await module.resolve(UserRepository);
         connection = await module.resolve(Connection);
     });
   

@@ -16,7 +16,6 @@ describe('CommentService', () => {
   let commentService: CommentService;
   let nftService: NftService;
   let commentRepository: CommentRepository;
-  let nftRepository: NftRepository;
 
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -26,7 +25,6 @@ describe('CommentService', () => {
     commentService = await module.resolve(CommentService);
     nftService = await module.resolve(NftService);
     commentRepository = await module.resolve(CommentRepository);
-    nftRepository = await module.resolve(NftRepository);
   });
 
   afterEach(() => {
