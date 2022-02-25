@@ -4,6 +4,7 @@ import { In } from "typeorm";
 import { LoaderDto } from "../nft/dto/loader.dto";
 import { CommentRepository } from "./comment.repository";
 import { CommentPaginationOutput } from "./dto/comment.pagination.output";
+import { CommentEntity } from "./entity/comment.entity";
 
 @Injectable({ scope: Scope.REQUEST })
 export class CommentsLoader {
@@ -11,7 +12,7 @@ export class CommentsLoader {
 
     public getCommentsByNftId = new DataLoader<LoaderDto, CommentPaginationOutput>(async (keys) => {
         const nftIds = [];
-        keys.forEach(loader => nftIds.push(loader.nftId));
+        keys.forEach((loader) => nftIds.push(loader.nftId));
         const pagination = keys[0].pagination;
         const take = pagination.limit || 5;
         const page = pagination.page || 1;
@@ -21,10 +22,10 @@ export class CommentsLoader {
             relations: ['nft'], 
             where: { nft: {id: In(nftIds as string[])}}});
 
-        return keys.map((loaderDto) => {
-            const outputUnpaginated = data.filter(comment => comment.nft.id === loaderDto.nftId)
-                                .sort((a, b) => a.updatedAt < b.updatedAt ? 1 : a.updatedAt > b.updatedAt ? -1 : 0);
-            const outputPaginated = outputUnpaginated.filter((comment, index) => index >= skip && index < skip + take);
+        return keys.map((loader) => {
+            const outputUnpaginated = this.filterByNftId(data, loader);
+            const outputSorted = this.sortByUpdatedAt(outputUnpaginated);
+            const outputPaginated = this.filterByPagination(outputSorted, skip, take);
             const total = outputUnpaginated.length;
             const lastPage = Math.ceil(total/take);
             const count = outputPaginated.length;
@@ -41,4 +42,20 @@ export class CommentsLoader {
             } as CommentPaginationOutput
         });
     });
+
+    private sortByUpdatedAt(comments: CommentEntity[]): CommentEntity[] {
+        return comments.sort((a, b) => {
+            if (a.updatedAt < b.updatedAt) return 1;
+            else if (a.updatedAt > b.updatedAt) return -1;
+            else return 0;
+        });
+    }
+
+    private filterByNftId(comments: CommentEntity[], loader: LoaderDto): CommentEntity[] {
+        return comments.filter(comment => comment.nft.id === loader.nftId);
+    }
+
+    private filterByPagination(comments: CommentEntity[], skip: number, take: number): CommentEntity[] {
+        return comments.filter((comment, index) => index >= skip && index < skip + take);
+    }
 }
