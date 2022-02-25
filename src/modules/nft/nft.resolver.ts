@@ -13,12 +13,15 @@ import { NftPaginationOutput } from './dto/nft.pagination.output';
 import { CommentPaginationOutput } from '../comment/dto/comment.pagination.output';
 import { NftEntity } from './entity/nft.entity';
 import { CommentService } from '../comment/comment.service';
+import { CommentsLoader } from '../comment/comment.loader';
+import { LoaderDto } from './dto/loader.dto';
 
 @Resolver(() => NftOutput)
 export class NftResolver {
   constructor(
     private readonly nftService: NftService,
     private readonly commentService: CommentService,
+    private readonly commentsLoader: CommentsLoader,
   ) {}
 
   @UseGuards(GqlAuth)
@@ -43,7 +46,8 @@ export class NftResolver {
   async getComments(@Parent() nft: NftEntity,
                     @Args('pagination', { nullable: true }) pagination: PaginationParams) {
     const { id } = nft;
-    return await this.commentService.findComments(pagination, id);
+    const loader = { nftId: id, pagination: pagination} as LoaderDto;
+    return this.commentsLoader.getCommentsByNftId.load(loader);
   }
 
   @UseGuards(GqlAuth)
