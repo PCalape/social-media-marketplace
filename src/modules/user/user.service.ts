@@ -23,7 +23,7 @@ export class UserService {
   }
 
   async deleteUserById(userId: string) {
-    const user = await this.userRepository.viewProfile(userId);
+    const [user] = await this.userRepository.viewProfile(userId);
     if (!user) throw new BadRequestException('User not found');
     await this.userRepository.softDelete(userId);
     return { message: "Successfully deleted user " + userId };
@@ -31,7 +31,7 @@ export class UserService {
 
   async restoreUserById(userId: string) {
     await this.userRepository.restore(userId);
-    const user = await this.userRepository.viewProfile(userId);
+    const [user] = await this.userRepository.viewProfile(userId);
     if (!user) throw new BadRequestException('User not found');
     return { message: "Successfully restored user " + userId };
   }

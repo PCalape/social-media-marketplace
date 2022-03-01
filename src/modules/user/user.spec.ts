@@ -90,7 +90,7 @@ describe('UserService', () => {
         it('should throw BadRequestException when user is not found', async () => {
             const userId = 'test user';
         
-            jest.spyOn(userRepository, 'viewProfile').mockImplementation(null);
+            jest.spyOn(userRepository, 'viewProfile').mockImplementation(async () => []);
             jest.spyOn(userRepository, 'softDelete').mockImplementation(null);
         
             await expect(userService.deleteUserById(userId))
@@ -116,7 +116,7 @@ describe('UserService', () => {
         it('should throw BadRequestException when user is not found', async () => {
             const userId = 'test user';
         
-            jest.spyOn(userRepository, 'viewProfile').mockImplementation(null);
+            jest.spyOn(userRepository, 'viewProfile').mockImplementation(async () => []);
             jest.spyOn(userRepository, 'restore').mockImplementation(null);
         
             await expect(userService.restoreUserById(userId))
