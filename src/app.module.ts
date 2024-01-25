@@ -17,6 +17,8 @@ import { UserModule } from './modules/user/user.module';
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       context: ({ req }) => ({ headers: req.headers }),
       installSubscriptionHandlers: true,
+      playground: true,
+      introspection: true,
     }),
     ConfigModule.forRoot({
       envFilePath: [`.env`],
